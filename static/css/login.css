@@ -1,0 +1,181 @@
+body{
+    background-color: whitesmoke;
+}
+header{
+    height: 97vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url('https://i.ibb.co/8DvrxNg/hero-bg.png');
+    background-position: center;
+    background-size: cover;
+}
+.content{
+    background-color: white;
+    border-top-right-radius:60px;
+    border-bottom-left-radius: 60px;
+    height: 70vh;
+    width: 80%;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.image{
+    width: 50%;
+    height: 100%;
+    border-bottom-right-radius:60px;
+    background-image: url('https://assets.materialup.com/uploads/f477d987-b382-4525-b9f1-90caf2bea87d/preview.gif');
+    background-position: center;
+    background-size: cover;
+
+
+}
+
+.form{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.logo{
+    display: flex;
+    margin-bottom: 20px;
+}
+h3{
+    font-family: sans-serif;
+    font-size: 25px;
+    color: rgb(160, 44, 242);
+
+}
+.form input{
+    background-color: white;
+    border: none;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right:0 ;
+    border-bottom:1px;
+    border-color: rgb(85, 80, 80);
+    width: 70%;
+    height: 50px;
+    outline: 0;
+    margin: 5px;
+    padding: 0px 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-size: 15px;
+    color: rgb(16, 13, 84);
+    font-weight: bolder;
+}
+.form select{
+    background-color: white;
+    border: none;
+    border-style: solid;
+    border-top: 0;
+    border-left: 0;
+    border-right:0 ;
+    border-bottom:1px;
+    border-color: rgb(85, 80, 80);
+    width: 70%;
+    height: 50px;
+    outline: 0;
+    margin: 5px;
+    padding: 0px 25px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-size: 15px;
+    color:black;
+
+}
+.select{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    padding: 0px 10px;
+}
+.form input:focus{
+    border-bottom: 2px;
+    border-color: gray;
+    border-style: solid;
+}
+button{
+    padding: 15px;
+    width: 70%;
+    background-color: rgb(94, 94, 249);
+    border-radius: 15px;
+    border-color: transparent;
+    color: white;
+    font-size: 18px;
+    margin-top: 10px;
+    opacity: 90%;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+h1{
+    color: rgb(78, 78, 242);
+    font-family: sans-serif;
+}
+h4{
+    color: black;
+    font-family: sans-serif;
+    opacity: 70%;
+}
+span{
+    color: rgb(64, 64, 245);
+}
+a{
+    text-decoration: none;
+}
+
+.error{
+    width: 50%;
+    height: 65px;
+    background-color: rgb(128, 123, 228);
+    color: white;
+    font-size: 17px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin: 30px;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+.error .ico,.close{
+    margin: 30px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.closeerror{
+    width: 0%;
+    height: 0%;
+    opacity: 10%;
+    display: block;
+    transition: 0.3s ease;
+}
+@media only screen and (max-width: 800px) {
+    .image{
+        display: none;
+        width: 0;
+    }
+    .content{
+        width: 90%;
+        height: 90%;
+    }
+    .form{
+        width: 100%;
+    }
+    header{
+        width: 100%;
+    }
+    .error{
+        width: 80%;
+    }
+}

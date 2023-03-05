@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
+    <link href="{% static '/img/favicon.png' %}" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    {% if user.is_staff %}
+    <title>Admin's Dashboard</title>
+    {% else %}
+    <title>{{user.username}}'s | Dashboard</title>
+    {% endif %}
+    <style>
+        .downmobile{
+            margin-top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="status">
+        <div class="logo">
+        <img src="{% static '/img/nice.png' %}">
+        </div>
+        {% if user.is_staff %}
+        <a class="active" href="#"><i class="fa-solid fa-rocket"></i> Admin Panel</a>
+        <a class="title" href="{% url 'users' %}"><i class="fa-solid fa-users"></i> User panel</a>
+        <a class="title" href="{% url 'messages' %}"><i class="fa-solid fa-comment"></i> Message Section</a>
+        <a class="title" href="/Ehub-admin/"><i class="fa-solid fa-user"></i> Super-Admin</a>
+        
+        {% else %}
+        <a class="active" href="#"><i class="fa-solid fa-rocket"></i>  Dashboard</a>
+        <a class="title" href="#"><i class="fa-solid fa-cloud"></i>  Courses</a>
+        <a class="title" href="#"><i class="fa-solid fa-comment"></i>  Comunities</a>
+        <a class="title" href="#"><i class="fa-solid fa-handshake-angle"></i> Help ?</a>
+        <a class="title" href="{% url 'logout' %}"><i class="fa-solid fa-user"></i> Logout</a>
+
+
+        {% endif %}
+        <div class="right">
+            <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="dp"
+                alt="dp">
+            {% if user.is_staff %}
+            <h2 class="usertitle">Administrator</h2>
+            {% else %}
+            <h2 class="usertitle">{{user.username}}</h2>
+            {% endif %}
+            <div class="last">
+            <h1 class="menu" id="menub"><i class="fa-solid fa-bars"></i></h1>
+            <h2><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i></a></h2>
+            <h1 style="color:transparent;" class="hide">..</h1>
+        </div>
+        </div>
+    </div>
+
+    <header id="mobile">
+        <div class="dropmenu">
+            <div class="logo">
+            <img src="{% static '/img/nice.png' %}">
+            </div>
+            {% if user.is_staff %}
+            <a class="active" href="#"><i class="fa-solid fa-rocket"></i> Admin Panel</a>
+            <a class="title" href="{% url 'users' %}"><i class="fa-solid fa-users"></i> User panel</a>
+            <a class="title" href="{% url 'messages' %}"><i class="fa-solid fa-comment"></i> Message Section</a>
+            <a class="title" href="/Ehub-admin/"><i class="fa-solid fa-user"></i> Super-Admin</a>
+            
+            {% else %}
+            <a class="active" href="#"><i class="fa-solid fa-rocket"></i>  Dashboard</a>
+            <a class="title" href="https://twitter.com/JayanathChamal?t=hU0NfnRuSviF4ozMlVqetQ&s=09"><i class="fa-solid fa-cloud"></i>  Courses</a>
+            <a class="title" href="https://chat.whatsapp.com/Jjia09H6oNwGoctc2UfXnL"><i class="fa-solid fa-comment"></i>  Comunities</a>
+            <a class="title" href="tel:0776140869"><i class="fa-solid fa-handshake-angle"></i> Help ?</a>
+            <a class="title" href="{% url 'logout' %}"><i class="fa-solid fa-user"></i> Logout</a>
+    
+            {% endif %}
+    </div>
+    </header>
+    <div class="constant">
+        <div class="img">
+            <div class="text">
+                {% if user.is_staff %}
+                <h4><i class="fa-solid fa-rocket"></i> Hello Administrator</h4>
+                <h1><i class="fa-solid fa-cloud"></i> Admin-panel</h1>
+                <div class="line"></div>
+                <p class="para">{{user.username}} You  are the admin of this E-Hub institute, you can view the messages sent by customers and view your users and edit them ! please keep your username and password protectly</p>
+                <a href="#" class="explore"><i class="fa-solid fa-rocket"></i> Manage site</a>
+                {% else %}
+                <h4><i class="fa-solid fa-rocket"></i> Hello {{user.username}}</h4>
+                <h1><i class="fa-solid fa-cloud"></i> Dashboard</h1>
+                <div class="line"></div>
+                <p class="para">You were succesfully registered on our {{user.first_name}} course. you can explore this site and improve your knowledge abouth this course and have a better service from E-Hub</p>
+                <a href="https://chat.whatsapp.com/Jjia09H6oNwGoctc2UfXnL" class="explore"><i class="fa-solid fa-rocket"></i>  Explore {{user.first_name}} course</a>
+                {% endif %}
+            </div>
+            <div class="image">
+            </div>
+        </div>
+        <div class="img">
+            <div class="image2">
+            </div>
+            <div class="text2">
+                {% if user.is_staff %}
+                <h4><i class="fa-solid fa-rocket"></i> Wellcome Administrator</h4>
+                <h1><i class="fa-solid fa-cloud"></i> E-Hub higer educational institure</h1>
+                <div class="line"></div>
+                <p class="para">Thought a shared commitment to a excellence, we are dedicated to the upcompromising quality of our service,exceptional care of your customers & employees</p>
+                <a href="#" class="explore"><i class="fa-solid fa-rocket"></i> Wellcome Admin</a>
+
+                {%else%}
+                <h4><i class="fa-solid fa-rocket"></i> Wellcome {{user.username}}</h4>
+                <h1><i class="fa-solid fa-cloud"></i> E-Hub higer educational institute</h1>
+                <div class="line"></div>
+                <p class="para">Thought a shared commitment to a excellence, we are dedicated to the upcompromising quality of our service,exceptional care of your customers & employees</p>
+                <a href="#" class="explore"><i class="fa-solid fa-rocket"></i> Wellcome {{user.username}}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+<script>
+    const menubtn = document.getElementById("menub");
+    const menulist = document.getElementById("mobile");
+
+    menubtn.addEventListener("click",changevent)
+    function changevent(){
+        menulist.classList.toggle("downmobile")
+    }
+</script>
+</body>
+
+</html>

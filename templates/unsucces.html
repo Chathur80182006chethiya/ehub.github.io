@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error !</title>
+    <style>
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+        .error{
+            height: 80%;
+            width: 50%;
+            display: flex;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .img{
+            height: 60%;
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+            margin-top: 20px;
+            background-image: url('https://cdn.dribbble.com/users/2469324/screenshots/6538803/comp_3.gif');
+        }
+        .message{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            flex-direction: column;
+            width: 70%;
+            text-align: center;
+            height: 40%;
+            font-family: cursive;
+        }
+        .why{
+            background-color: rgb(228, 98, 98);
+            color:white;
+            padding: 15px 25px;
+            text-decoration: none;
+        }
+        @media only screen and (max-width: 850px) {
+            .error{
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="error">
+            <div class="img"></div>
+            <div class="message">
+                <h3>Something went wrong! please try again</h3>
+                <h4>[*] User Allready exists ?</h4>
+                <h4>[*] Weak password ?</h4>
+                <a href="#" class="why">Learn More</a>
+            </div>
+        </div>
+    </header>
+</body>
+<script>
+    setTimeout(function() {
+    window.location = "{% url 'register' %}"
+  }, 4000);
+</script>
+</html>

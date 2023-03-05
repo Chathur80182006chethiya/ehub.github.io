@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static '/css/login.css' %}">
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <title>E-Hub | Login</title>
+</head>
+
+<body>
+  <header>
+    <div class="error" id="errorSection">
+      <div class="ico"><i class="fa-solid fa-circle-exclamation"></i></div>
+      <div class="message"><p id='txterror'>An Error Occured</p></div>
+      <div class="close">
+        <i class="fa-sharp fa-regular fa-circle-xmark" id="closeBtn"></i>
+      </div>
+    </div>
+    <div class="content">
+      <div class="image"></div>
+        <form method="post" onsubmit="return validateForm()" class="form" name="RegisterForm">
+          <div class="logo"><img src="{% static '/img/nice.png' %}" ></div>
+          {% csrf_token %}
+          <h1><i class="fa fa-user-circle" aria-hidden="true"></i>  Be Logged in</h1>
+          <input type="text" name="username" maxlength="150" placeholder="username">
+          <input type="password" name="password" autocomplete="new-password" placeholder="password">
+          <h4>Dont have an Account ?  <span><a href="{% url 'register' %}">Sign up here</a></span></h4>
+          <button type="submit"><i class="fa-solid fa-bomb"></i> Login</button>
+        </form>
+      </div>
+    </div>
+  </header>
+  <script>
+    const closeBtn = document.getElementById('closeBtn');
+    const errorSection = document.getElementById('errorSection');
+    const error = document.getElementById('txterror');
+
+    errorSection.classList.add('closeerror');
+    
+    function showAndHide(){
+      errorSection.classList.remove('closeerror');
+      errorSection.classList.toggle('error-addstyle');
+    }
+    function validateForm(){
+      
+      let UserName = document.forms["RegisterForm"]["username"].value;
+      let pssword = document.forms["RegisterForm"]["password"].value;
+
+      if(UserName == ''){
+        error.innerHTML="Please fill the username field"
+        showAndHide()
+        return false
+      }
+      if(pssword==''){
+        error.innerHTML="Please enter the password"
+        showAndHide()
+        return false
+      }
+      if(pssword.length < 8){
+        error.innerHTML = "This might not be your password"
+        showAndHide()
+        return false
+      }
+    }
+    closeBtn.addEventListener("click",closeError)
+    function closeError(){
+      errorSection.classList.toggle("closeerror")
+    }
+  </script>
+</body>
+
+</html>

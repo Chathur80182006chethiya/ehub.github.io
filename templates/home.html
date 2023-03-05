@@ -1,0 +1,767 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>E Hub Higher Education Institute</title>
+  <meta content="" name="description">
+
+  <meta content="" name="keywords">
+
+  <link href="{% static '/img/favicon.png' %}" rel="icon">
+  <link href="{% static '/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="{% static '/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static '/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <link href="{% static '/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+        <img src="{% static '/img/logo.png' %}" alt="">
+        <span>E-Hub SL</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Join us</a></li>
+              <li class="dropdown"><a href="#"><span>Explore us</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  {% if user.is_authenticated %}
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
+                  {% else %}
+                  <li><a href="{% url 'register' %}">Register</a></li>
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                  {% endif %}
+                  <li><a href="#">More Info</a></li>
+                </ul>
+              </li>
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+              <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+              {% else %}
+              <li><a href="{% url 'register' %}">Register</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+              {% endif %}
+              <li><a href="#">Terms and Conditions</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          {% if user.is_authenticated and user.is_staff %}
+          <li><a class="getstarted scrollto" href="{% url 'dashboard' %}">Administrator</a></li>
+          {% else %}
+          {% if user.is_authenticated %}
+          <li><a class="getstarted scrollto" href="{% url 'dashboard' %}">{{user.username}}</a></li>
+          {% else %}
+          <li><a class="getstarted scrollto" href="{% url 'register' %}">Get Started</a></li>
+          {% endif %}
+          {% endif %}
+    
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up"> E Hub Higher Education Institute - Sri Lanka</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">𝘼 𝙟𝙤𝙪𝙧𝙣𝙚𝙮 𝙗𝙚𝙮𝙤𝙣𝙙 𝙩𝙝𝙚 𝙩𝙧𝙖𝙙𝙞𝙩𝙞𝙤𝙣.</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+                {% if user.is_authenticated and user.is_staff %}
+                <a href="{% url 'dashboard' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get into Admin Panel</span><i class="bi bi-arrow-right"></i>
+              </a>
+                {% else %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get into Dashboard</span><i class="bi bi-arrow-right"></i></a>
+                {% else %}
+                <a href="{% url 'register' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Login Or Register</span><i class="bi bi-arrow-right"></i></a>
+                {% endif %}
+                {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="{% static '/img/hero-img.png' %}" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Who We Are</h3>
+              <h2>E-HUB Higher Education Institute | අප කවුරුන්ද ?</h2>
+              <p>
+                🟥 ඔබේ ජීවිතයම වෙනස් කරන ලංකාවේ හොදම eBay Selling හා binance පාඨමාලාව. එන්න නව වෙනසක් උදෙසා, අපත් සමග එකතුවන්න. ඔබගේ දිවිය සාර්තකත්වයට ගෙනයන හිතවතා ඔබ ලගයි.
+
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Read More</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{% static '/img/about.jpg' %}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section id="values" class="values">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Our Values</h2>
+          <p>අප අනෙකුත් ආයතන වලින් වෙනස් වන්නේ ඇයි ?</p>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="box">
+              <img src="{% static '/img/values-1.png' %}" class="img-fluid" alt="">
+              <h3>Life Time Support</h3>
+              <p>ඔබට සාර්ථකව eBay ගිණුම පවත්වාගෙන යාමට අප ආයතනය මගින් Life Time මාර්ගෝපදේශනය ලබා දීම.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+            <div class="box">
+              <img src="{% static '/img/values-2.png' %}" class="img-fluid" alt="">
+              <h3> Life time revision class<b>(Free)</b></h3>
+              <p>ඔබට Gmail Account, eBay Account, Payoneer account  අවසන් කිරීමෙන් පසුව මසකට දින 2-3 ක් නොමිලේ Revision පැවැත්වේ.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+            <div class="box">
+              <img src="{% static '/img/values-3.png' %}" class="img-fluid" alt="">
+              <h3>Zoom meeting support</h3>
+              <p>Zoom තාක්ෂණය හරහා මාර්ගගත ක්‍රමය ඔස්සේ ඉතා පහසුවෙන් ඔබට පාඨමාලාව හැදෑරීමට හැකි වීම.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="counts" class="counts">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-emoji-smile"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Happy Clients</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="51" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Projects</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-headset" style="color: #15be56;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="24" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Hours Of Support</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="bi bi-people" style="color: #bb0852;"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Hard Workers</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="features" class="features">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Features</h2>
+          <p>අප සමග අත්වැල් බැද ගන්නා ඔබට..</p>
+        </header>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <img src="{% static '/img/features.png' %}" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+            <div class="row align-self-center gy-4">
+
+              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
+                <div class="feature-box d-flex align-items-center">
+                  <i class="bi bi-check"></i>
+                  <h3>Zoom තාක්ෂණය හරහා පාඨමාලාව හැදෑරීමට හැකි වීම.</h3>
+                </div>
+              </div>
+
+              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
+                <div class="feature-box d-flex align-items-center">
+                  <i class="bi bi-check"></i>
+                  <h3>ඔබට Gmail, eBay,Payoneer account අවසන් කිරීමෙන් පසුව මසකට දින 2-3 ක් නොමිලේ Revision පැවැත්වේ.</h3>
+                </div>
+              </div>
+
+              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
+                <div class="feature-box d-flex align-items-center">
+                  <i class="bi bi-check"></i>
+                  <h3>පාඨමාලා සදහා දේශන සදහා සහභාගි වන සියලුම ආචාර්යවරුන් දක්ෂ පිරිසක් වීම. </h3>
+                </div>
+              </div>
+
+              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
+                <div class="feature-box d-flex align-items-center">
+                  <i class="bi bi-check"></i>
+                  <h3>ඔබට සාර්ථකව eBay ගිණුම පවත්වාගෙන යාමට අප ආයතනය මගින් Life Time මාර්ගෝපදේශනය ලබා දීම.</h3>
+                </div>
+              </div>
+
+              <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
+            </div>
+          </div>
+
+        </div> 
+
+        <div class="row feture-tabs" data-aos="fade-up">
+          <div class="col-lg-6">
+            <h3>Binary Sri Lanka full course | බයිනරි ශ්‍රීලංකා සම්පූර්ණ පාඨමාලාව</h3>
+
+            <ul class="nav nav-pills mb-3">
+              <li>
+                <a class="nav-link active" data-bs-toggle="pill" href="#tab1">Learn More</a>
+              </li>
+           </ul>
+
+            <div class="tab-content">
+
+              <div class="tab-pane fade show active" id="tab1">
+                <p><b>බයිනරි ශ්‍රීලංකා සම්පූර්ණ  පාඨමාලාව. මෙහිදී බයිනරි ගිණුමක් සෑදීමේ සිට ගිණුමට මුදල් බැර කිරීම සහ බයිනරි ගිණුමෙන් මුදල් ඔබෙ බැංකුවට ලබා ගැනීම (account deposit and withdraw) දක්වාත් අප විසින් භාවිතා කරන අධික ලාබයක් ගෙන දෙන (high profit strategy) රැසක් මෙහිදී ඉතාමත් සරලව ඔබට උගන්වනු ලැබේ. </b></p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>How can I do that valueble course ?</h4>
+                </div>
+                <p><b>ඔබත්  බයිනරි ශ්‍රිලංකා Advance full course  එක කරන්න කැමතිනම් registation එකට binary යටතේ ඔයා register වෙන්න නැතිනම් ඔබ අප හා සම්බන්ධ වූ අප ආයතනයේ සාමාජිකයා ලවා registation එක කරගන්න ඔබට පුලුවන්. 
+</p></b>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>What about the course fee ?</h4>
+                </div>
+                <p>It is <b>only</b> -: 10,000 LKR</p>
+              </div>
+
+              <div class="tab-pane fade show" id="tab2">
+                <p>Ebay-selling සහ binance ඔබට සාර්තකත්වය ගෙනදෙන ආකාරය සැකෙවින්</p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                </div>
+                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                </div>
+                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
+              </div><!-- End Tab 2 Content -->
+
+              <div class="tab-pane fade show" id="tab3">
+                <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                </div>
+                <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                </div>
+                <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <img src="{% static '/img/features-2.png' %}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+
+        <div class="row feature-icons" data-aos="fade-up">
+          <h3>Ebay-selling සහ binance ඔබට සාර්තකත්වය ගෙනදෙන ආකාරය සැකෙවින්..</h3><br>
+          <h3 style="color:transparent;">.........</h3>
+
+          <div class="row">
+
+            <div class="col-xl-4 text-center" data-aos="fade-right" data-aos-delay="100">
+              <img src="{% static '/img/features-3.png' %}" class="img-fluid p-4" alt="">
+            </div>
+
+            <div class="col-xl-8 d-flex content">
+              <div class="row align-self-center gy-4">
+
+                <div class="col-md-6 icon-box" data-aos="fade-up">
+                  <i class="ri-line-chart-line"></i>
+                  <div>
+                    <h4>Low Fees<h4>
+                    <p>The platform offers low fees, meaning traders get to keep more of their investments and earnings</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                  <i class="ri-stack-line"></i>
+                  <div>
+                    <h4>Little Invesment</h4>
+                    <p>investment involves putting capital to use today in order to increase its value over time.</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                  <i class="ri-brush-4-line"></i>
+                  <div>
+                    <h4>Stability</h4>
+                    <p>You can have the state of being firmly fixed or not likely to move or change in the business</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                  <i class="ri-magic-line"></i>
+                  <div>
+                    <h4>Convienient</h4>
+                    <p>enhanced flexibility in presenting items without the constraints of a physical effort</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                  <i class="ri-command-line"></i>
+                  <div>
+                    <h4>cryptocurrencies</h4>
+                    <p>Binance is an online exchange where users can trade cryptocurrencies.</p>
+                  </div>
+                </div>
+
+                <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
+                  <i class="ri-radar-line"></i>
+                  <div>
+                    <h4>Good for beginers</h4>
+                    <p>If you are a beginner,this is probably the easiest and cheapest way to go</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="services" class="services">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>You Will Learn</h2>
+          <p>Binary course එක හදාරන ඔබට ඉගෙනීමට හැකි වන දෑ . . .</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-box blue">
+              <i class="ri-discuss-line icon"></i>
+              <h3>How to make binary account</h3>
+              <p>If you become our student of our binary course you will learn "How to make binary account"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-box orange">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Deposit and withdraw</h3>
+              <p>If you become our student of our binary course you will learn "Deposit and withdraw"<p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box green">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Forex market chart analyze</h3>
+              <p>If you become our student of our binary course you will learn "Forex market chart analyze"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Synthetic market charts analyze</h3>
+              <p>If you become our student of our binary course you will learn "Synthetic market charts analyze"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-box purple">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Indicators trade method</h3>
+              <p>If you become our student of our binary course you will learn "Indicators trade method"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+            <div class="service-box pink">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Candle sticks pattern trade method</h3>
+              <p>If you become our student of our binary course you will learn "Candle sticks pattern trade method"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+                  <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-box blue">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Chart Pattern trade method</h3>
+              <p>If you become our student of our binary course you will learn "Chart Pattern trade method"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-box orange">
+              <i class="ri-discuss-line icon"></i>
+              <h3>How to make sniper shot entry</h3>
+              <p>If you become our student of our binary course you will learn "How to make Sniper Shot entry"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box green">
+              <i class="ri-discuss-line icon"></i>
+              <h3>How to analyze trend reversal</h3>
+              <p>If you become our student of our binary course you will learn "How to analyze trend reversal"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Binary secrets</h3>
+              <p>If you become our student of our binary course you will learn "Binary secrets"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box green">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Money management</h3>
+              <p>If you become our student of our binary course you will learn "money management"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Trade management</h3>
+              <p>If you become our student of our binary course you will learn "Trade Management"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Minutes trade strategies</h3>
+              <p>If you become our student of our binary course you will learn "Miniutes Trade Stategies"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-box green">
+              <i class="ri-discuss-line icon"></i>
+              <h3>Multiplier deriv.com</h3>
+              <p>If you become our student of our binary course you will learn about "Multiplier deriv.com"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-box red">
+              <i class="ri-discuss-line icon"></i>
+              <h3>A to z minutes trade</h3>
+              <p>If you become our student of our binary course you will learn about "A to Z minutes Trading"</p>
+              <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Contact</h2>
+          <p>Contact Us</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+
+            <div class="row gy-4">
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Address</h3>
+                  <p>We are spread on<br>All over the world</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>0705102250<br>0776140869</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>Chamaljayanath206@gmail.com<br>Chamaljayanath96@gmail.com</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-clock"></i>
+                  <h3>Open Hours</h3>
+                  <p>You can Recieve<br>24 - Hour service</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <form method="post" class="php-email-form">
+              {% csrf_token %}
+
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                </div>
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 text-center">
+            <h4>What Do you think about us ?</h4>
+            <p>Please express your ideas anonymously by using this section for a maintain better service for you</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Send Idea">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="{% static '/img/logo.png' %}" alt="">
+              <span>E-Hub</span>
+            </a>
+            <p>🔰𝙏𝙝𝙧𝙤𝙪𝙜𝙝𝙩 𝙖 𝙨𝙝𝙖𝙧𝙚𝙙 𝙘𝙤𝙢𝙢𝙞𝙩𝙢𝙚𝙣𝙩 𝙩𝙤 a 𝙚𝙭𝙘𝙚𝙡𝙡𝙚𝙣𝙘𝙚, 𝙬𝙚 𝙖𝙧𝙚 𝙙𝙚𝙙𝙞𝙘𝙖𝙩𝙚𝙙 𝙩𝙤  𝙩𝙝𝙚  𝙪𝙣𝙘𝙤𝙢𝙥𝙧𝙤𝙢𝙞𝙨𝙞𝙣𝙜  𝙦𝙪𝙖𝙡𝙞𝙩𝙮 𝙤𝙛 𝙤𝙪𝙧 𝙨𝙚𝙧𝙫𝙞𝙘𝙚, 𝙚𝙭𝙘𝙚𝙥𝙩𝙞𝙤𝙣𝙖𝙡 𝙘𝙖𝙧𝙚 𝙤𝙛 𝙤𝙪𝙧 𝙘𝙪𝙨𝙩𝙤𝙢𝙚𝙧𝙨 & 𝙚𝙢𝙥𝙡𝙤𝙫𝙚𝙚𝙨...
+</p>
+            <div class="social-links mt-3">
+              <a href="https://twitter.com/JayanathChamal?t=hU0NfnRuSviF4ozMlVqetQ&s=09" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="https://chat.whatsapp.com/Jjia09H6oNwGoctc2UfXnL" class="facebook"><i class="bi bi-whatsapp"></i></a>
+              <a href="https://twitter.com/JayanathChamal?t=hU0NfnRuSviF4ozMlVqetQ&s=09" class="instagram"><i class="bi bi-tiktok"></i></a>
+              <a href="https://t.me/+qyrj9aMKprc4Y2M1" class="linkedin"><i class="bi bi-telegram"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Valueble Courses</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Ebay selling</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Binary course</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Binance</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Digital marketing</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              Available:-<br>
+              All over the world<br><br>
+              <strong>Phone:</strong>070 51 02 250<br>
+              <strong>Email:</strong> Chamaljayanath96@gmail.com<br>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>E-Hub</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://wa.me/94751651835">Anonrider 404</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="{% static '/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static '/vendor/aos/aos.js' %}"></script>
+  <script src="{% static '/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static '/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static '/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static '/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <script src="{% static '/js/main.js' %}"></script>
+
+</body>
+
+</html>

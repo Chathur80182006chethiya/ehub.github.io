@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/dashboard.css' %}">
+    <link href="{% static '/img/favicon.png' %}" rel="icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <title>Message section</title>
+    <style>
+        .downmobile{
+            margin-top: 0px;
+        }
+    </style>
+</head>
+{% if user.is_staff %}
+<body>
+    <div class="status">
+        <div class="logo">
+        <img src="{% static '/img/nice.png' %}">
+        </div>
+        <a class="title" href="{% url 'dashboard' %}"><i class="fa-solid fa-rocket"></i> Admin Panel</a>
+        <a class="title" href="{% url 'users' %}"><i class="fa-solid fa-users"></i> User panel</a>
+        <a class="active" href="#"><i class="fa-solid fa-comment"></i> Message Section</a>
+        <a class="title" href="/Ehub-admin/"><i class="fa-solid fa-user"></i> Super-Admin</a>
+        <div class="right">
+            <img src="https://icons.veryicon.com/png/o/miscellaneous/two-color-icon-library/user-286.png" class="dp"
+                alt="dp">
+            <h2 class="usertitle">Administrator</h2>
+            <div class="last">
+            <h1 class="menu" id="menub"><i class="fa-solid fa-bars"></i></h1>
+            <h2><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i></a></h2>
+            <h1 style="color:transparent;" class="hide">..</h1>
+        </div>
+        </div>
+    </div>
+
+    <header id="mobile">
+        <div class="dropmenu">
+            <div class="logo">
+            <img src="{% static '/img/nice.png' %}">
+            </div>
+            <a class="title" href="{% url 'dashboard' %}"><i class="fa-solid fa-rocket"></i> Admin Panel</a>
+            <a class="title" href="{% url 'users' %}"><i class="fa-solid fa-users"></i> User panel</a>
+            <a class="active" href="{% url 'messages' %}"><i class="fa-solid fa-comment"></i> Message Section</a>
+            <a class="title" href="/Ehub-admin/"><i class="fa-solid fa-user"></i> Super-Admin</a>
+        </div>
+    </header>
+    <div class="usr">
+        <div class="users">
+          <table class="usertb">
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th class="mediahide">subject</th>
+                <th>Message</th>
+            </tr>
+            {% for item in message %}
+            <tr>
+                <td>{{item.username}}</td>
+                <td>{{item.email}}</td>
+                <td class="mediahide">{{item.subject}}</td>
+                <td>{{item.msg}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+          </table>
+        </div>
+    </div>
+<script>
+    const menubtn = document.getElementById("menub");
+    const menulist = document.getElementById("mobile");
+
+    menubtn.addEventListener("click",changevent)
+    function changevent(){
+        menulist.classList.toggle("downmobile")
+    }
+</script>
+{% else %}
+<h1>You are not permited</h1>
+{% endif %}
+</body>
+
+</html>
